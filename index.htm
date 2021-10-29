@@ -103,6 +103,18 @@ h5 {
 	letter-spacing:2px;
     text-align: center;
     }
+h6 {
+	margin:0;
+	height: auto;
+	font-family: arial;
+    text-align: justify;
+	color:white;
+    font-size:16px;
+	padding: 0px 20px;
+	letter-spacing:1px;
+    line-height: 18px;
+    border: 1px solid white;
+    }
 
 a:link, a:visited {
   background-color: #ffffff;
@@ -192,21 +204,17 @@ a:hover, a:active {
 <center><table id="table_data">
 <h2>Les Sondes</h2>
 <tr>
-	<td width="20%"><h3><br><br><br>Sonde Température</h3></td>
+	<td width="20%"><h3><br><br><br><br>Sonde Température</h3></td>
     <td width="80%"><h4><br>La sonde de température infrarouge AIoT-TMP53BE est reliée au microcontrolleur par un bus différentiel I2C. Ceci permet l'utilisation d'un fils Cat5 avec une longueur
     maximale de 100 pieds. Le capteur principal est le modèle MLX90614ESF de Melexis, de grade medical et très précis. Le champs visuel de la sonde est de 5 degrée. Donc, à une distance de 30 pouces,
     la sonde voit une surface de 2.6 pouces de diametre, à une distance de 10 pouces, la sonde voit une surface de 0.86 pouce. La formule pour calculer le diamètre vue par la sonde à une distance 
     donnée d'un object est: Diamètre = tan(2.5) x Distance x 2. A titre d'information, la diode laser est calibrée pour être centrée sur un object à une distance de 30 pouces.</h4></td>
 </tr>
 <tr>
-	<td width="20%"><h3><br><br><br>Sonde Radar Huile</h3></td>
-    <td width="80%"><h4><br><br><br>Le commutateur "Relais 2" n'est présentement pas utilisé. Il est tout de même fonctionel et peut être utilisé pour ouvrir ou fermé un circuit avec une 
-    charge maximale de 10A à 120 volts.</h4></td>
-</tr>
-<tr>
-	<td width="20%"><h3><br><br><br>Sonde Radar Grain</h3></td>
-    <td width="80%"><h4><br><br>Le commutateur "Relais 2" n'est présentement pas utilisé. Il est tout de même fonctionel et peut être utilisé pour ouvrir ou fermé un circuit avec une 
-    charge maximale de 10A à 120 volts.</h4></td>
+	<td width="20%"><h3><br><br><br>Sonde Radar<br>Huile/Grain</h3></td>
+    <td width="80%"><h4><br><br>Les sondes Radar AIoT-DMP515 utilisent un sensor ultrasonic HC-SR04 et mesure la distance entre celci et un object dont elles visent. Leurs angles effectives de champs
+    de visions est de 15 degrés. Elles sont alimentées par le bloc d'alimentation MDR-60-5. Finallement, leurs valeur respectives sont mesuré par le microcontrolleur aux entrés #22 (trig/vert) et #23 (echo/blanc) pour
+    l'huile et #24 (trig/vert) et #25 (echo/blanc) pour le grain.</h4></td>
 </tr>
 <tr>
 	<td width="20%"><h3><br><br><br>Sonde Photo<br>Électrique</h3></td>
@@ -214,13 +222,13 @@ a:hover, a:active {
     ainsi qu'a la connection #26 du microcontrolleur. Lorsque le feeder de grain est vide, la lumière réféchis sera moindre et la sonde communiquera ceci au microcontrolleur.</h4></td>
 </tr>
 <tr>
-	<td width="20%"><h3><br><br><br>Sonde Courant</h3></td>
+	<td width="20%"><h3><br><br><br><br>Sonde Courant</h3></td>
     <td width="80%"><h4><br><br>La sonde de courant utilise un couvertisseur de courant SCT-013-020 pouvant mesuré jusqu'à 20 ampères. Lorque le courant passe dans un fil dont la sonde contourne, 
     la sonde produit un voltage variant de 0 à 1 volt maximum losrqu'à 20A. Le convertisseur est branché à un diviseur de voltage ainsi qu'un circuit stabilisateur qui a son tour est alimenté par le bloc 
     d'alimentation MDR-60-5. Finallement, le voltage résultant est connecté et mesuré par l'entré analog A0 du microcontrolleur.</h4></td></h4></td>
 </tr>
 <tr>
- 	<td width="20%"><h3><br><br><br>Sonde RPM</h3></td>
+ 	<td width="20%"><h3><br><br><br><br>Sonde RPM</h3></td>
     <td width="80%"><h4><br><br>La sonde RPM est un "Hall Effect Sensor" placé perpendiculère et a proximité d'une surface en rotation du moteur (example une fan) ayant un petit aimant fixe.
     La sonde est branché au bloc d'alimentation 5 volts MDR-60-5 ainsi qu'a la connection #3 du microcontrolleur.</h4></td>
 </tr>
@@ -229,10 +237,18 @@ a:hover, a:active {
 <center><table id="table_data">
 <h2>Opération</h2>
 <tr>
-	<td width="100%"><h4><br>Comme le moteur de la presse est relié à la borne normalement fermé du relais #1 de ce système, si le microcontrolleur ou le bloc d'alimentation du module relais/sondes
-        est intérrompu ou tombe en panne, ceci nauras aucune incidence sur le fonctionnement de la presse à l'huile. Au début des opérations, lorsque la presse est mis en marche, il est important
-        fortement recommender de presse sur le commutateur "Reset". Ceci remettra tout les variable à zéro incluant le temps de marche. Le moteur de la presse peut-être arréter et repartie en tout
-        temps en appuyant sur le boutton "Relais #1". </h4></td>
+	<td width="100%"><h6><br> Au début des opérations, lorsque la presse est mis en marche, il est fortement recommender d'appuyer sur le commutateur "Reset". Ceci remettra tout les variable à zéro
+        incluant le temps de marche. Le moteur de la presse peut-être arréter et repartie en tout temps en appuyant sur le boutton "Relais #1".<br><br>Lorsqu'un des paramètres des jauges ci-hauts mentionnées
+        dépasse la limite rouge, le relais #1 sera automatiquement enclanché ce qui auras pour effect d'ouvris le contact normalement fermé (NC) du Relais #1 et arrêterra donc le moteur de la presse. Lorsque le
+        paramètres fautif sera rectifier, il sera possible de repartir la presse en appuyant sur le communtateur Relais #1. Pour des raison de securité, noter que la rectification du paramètre fautif à lui seul
+        ne repartiras pas la presse de façon automatique, il faut quand même appuyé sur le commutateur Relais #1 ou appuyer sur le commutateur "Reset"<br><br>  
+        Lorque le système de sécurité détecte un paramètre hors norme (rouge) et enclanche le Realis #1, il générera aussi une alerte SMS à l'opérateur de la presse. Pour éviter de recevoir des messages SMS 
+        à répétition, le système envoie seulement qu'un alerte à toute les soixante minutes. Par contre, si le commutateur "Reset" est appuyer, le compte à rebours de 60 minutes avant la prochaine alerte
+        SMS est annuler. Donc si une des conditions d'alerte se reproduit, un SMS serait de nouveau immédiatement émis.<br><br>  
+        Si pour des raisons quelconques (testes, maintenance, etc...) l'opérateur veut forcer le système à quand même fonctionné et ignorés les déclencheurs automatiques de sécurités, l'opérateur peut appuyer sur le 
+        commutateur "Override". Noter que les alertes SMS sont aussi cancelés lorsque ce le commutateur "Override" est selectioné.<br><br>  
+        Comme le moteur de la presse est relié à la borne normalement fermé du relais #1 de ce système, si le microcontrolleur ou le bloc d'alimentation du module relais/sondes
+        est intérrompu ou tombe en panne, ceci nauras aucune incidence sur le fonctionnement de la presse à l'huile.<br><br></h6></td>
 </tr>
 </table></center>
 <center><img src="https://aiot-consulting.github.io/Nature_Highland_manual/AIoT_Logo_blk_bg.png" alt="AIoT Consulting Logo" style="width:150px;height:150px;"></center>
